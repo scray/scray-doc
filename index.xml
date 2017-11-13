@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Scray Documentation</title>
-    <link>https://scray.github.io/</link>
+    <link>https://scray.github.io/scray-doc/</link>
     <description>Recent content on Scray Documentation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 13 Nov 2017 11:32:26 +0100</lastBuildDate>
     
-	<atom:link href="https://scray.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://scray.github.io/scray-doc/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Install CDH 5.13.0 on Ubuntu 16.04.2</title>
-      <link>https://scray.github.io/installation/cdh5.13-ubuntu-16/</link>
+      <link>https://scray.github.io/scray-doc/installation/cdh5.13-ubuntu-16/</link>
       <pubDate>Mon, 13 Nov 2017 11:32:26 +0100</pubDate>
       
-      <guid>https://scray.github.io/installation/cdh5.13-ubuntu-16/</guid>
+      <guid>https://scray.github.io/scray-doc/installation/cdh5.13-ubuntu-16/</guid>
       <description>Hosts
    IP Hostname     10.0.0.1 node1   10.0.0.2 node2     Disable IPv6 Edit /etc/sysctl.conf and add this values
 net.ipv6.conf.all.disable_ipv6 = 1 net.ipv6.conf.default.disable_ipv6 = 1 net.ipv6.conf.lo.disable_ipv6 = 1  Reload configuration
