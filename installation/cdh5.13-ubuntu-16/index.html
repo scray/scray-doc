@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="generator" content="Hugo 0.30.2" />
+    <meta name="description" content="">
+
+
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+<link rel="icon" href="/images/favicon.png" type="image/x-icon" />
+
+    <title>Install CDH 5.13.0 on Ubuntu 16.04.2 :: Scray Documentation</title>
+    
+    
+    <link href="/css/nucleus.css?1510589202" rel="stylesheet">
+    <link href="/css/font-awesome.min.css?1510589202" rel="stylesheet">
+    <link href="/css/hybrid.css?1510589202" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1510589202" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1510589202" rel="stylesheet">
+    <link href="/css/auto-complete.css?1510589202" rel="stylesheet">
+    <link href="/css/theme.css?1510589202" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1510589202" rel="stylesheet">
+    
+      <link href="/css/theme-scray.css?1510589202" rel="stylesheet">
+    
+
+    <script src="/js/jquery-2.x.min.js?1510589202"></script>
+    
+    <style type="text/css">
+      :root #header + #content > #left > #rlblock_left{ 
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/installation/cdh5.13-ubuntu-16/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <html>
+<body>
+
+<img src="/images/scray-logo.svg" alt="Scray Logo">
+
+</body>
+</html>
+
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fa fa-search"></i></label>
+    <input data-search-input id="search-by" type="text" placeholder="Search...">
+    <span data-search-clear=""><i class="fa fa-close"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1510589202"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1510589202"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/scray.github.io\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1510589202"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/installation/" title="Installation" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/installation/">
+          Installation
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/installation/cdh5.13-ubuntu-16/" title="Install CDH 5.13.0 on Ubuntu 16.04.2" class="dd-item active">
+        <a href="/installation/cdh5.13-ubuntu-16/">
+        Install CDH 5.13.0 on Ubuntu 16.04.2
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/configuration/" title="Configuration" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/configuration/">
+          Configuration
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+
+    
+    <section id="footer">
+      <center>
+    <a class="github-button" href="https://github.com/scray/scray/archive/master.zip" data-icon="octicon-cloud-download" aria-label="Download /scray/scray on GitHub">Download</a>
+
+    <a class="github-button" href="https://github.com/scray/scray" data-icon="octicon-star" data-show-count="true" aria-label="Star https://github.com/scray/scray on GitHub">Star</a>
+
+    <a class="github-button" href="https://github.com/scray/scray/fork" data-icon="octicon-repo-forked" data-show-count="true" aria-label="Fork scray/scray on GitHub">Fork</a>
+
+    <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fa fa-heart"></i></a> from <a href="http://getgrav.org">Grav</a> and <a href="http://gohugo.io/">Hugo</a></p>
+</center>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable sticky-parent">
+              
+              <div class="sticky-spacer">
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fa fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fa fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/'></a> > <a href='/installation/'>Installation</a> > Install CDH 5.13.0 on Ubuntu 16.04.2
+          
+         
+          
+         
+          
+           
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#disable-ipv6">Disable IPv6</a></li>
+<li><a href="#configure-hostnames">Configure hostnames</a></li>
+<li><a href="#update-java-home-directory-in-cdh-manager">Update Java Home Directory in CDH Manager</a></li>
+<li><a href="#add-host2">Add host2</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+
+        
+        <div id="body-inner">
+          
+            <h1>Install CDH 5.13.0 on Ubuntu 16.04.2</h1>
+          
+
+        
+
+
+
+
+<p>Hosts</p>
+
+<table>
+<thead>
+<tr>
+<th>IP</th>
+<th>Hostname</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>10.0.0.1</td>
+<td>node1</td>
+</tr>
+
+<tr>
+<td>10.0.0.2</td>
+<td>node2</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li><h3 id="disable-ipv6">Disable IPv6</h3>
+
+<p>Edit <code>/etc/sysctl.conf</code> and add this values</p>
+
+<pre><code>net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
+</code></pre>
+
+<p>Reload configuration</p>
+
+<p><code>sudo sysctl -p</code></p></li>
+
+<li><h3 id="configure-hostnames">Configure hostnames</h3></li>
+</ul>
+
+<p>Edit on &lsquo;node1&rsquo; and &lsquo;node2&rsquo; <code>/etc/hosts</code>.</p>
+
+<p>Add:</p>
+
+<pre><code>  10.0.0.1  node1
+  10.0.0.1  node2
+</code></pre>
+
+<ul>
+<li>### Install Java 8
+<code>
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java8-installer
+sudo apt-get install oracle-java8-set-default
+</code></li>
+<li>Install Cloudera MANAGER on &lsquo;node1&rsquo;</li>
+</ul>
+
+<p>Run:</p>
+
+<pre><code>```
+wget http://archive.cloudera.com/cm5/installer/latest/cloudera-manager-installer.bin
+chmod u+x cloudera-manager-installer.bin
+sudo ./cloudera-manager-installer.bin
+```
+</code></pre>
+
+<ul>
+<li><p>Connect to WebUI</p>
+
+<ul>
+<li>Host:   10.0.0.1</li>
+<li>User:     admin</li>
+<li>Password:     admin</li>
+</ul></li>
+
+<li><h3 id="update-java-home-directory-in-cdh-manager">Update Java Home Directory in CDH Manager</h3>
+
+<p><a href="https://www.cloudera.com/documentation/enterprise/5-3-x/topics/cm_ig_java_home_location.html#cmig_topic_16">Cloudere doc</a></p></li>
+
+<li><h3 id="add-host2">Add host2</h3>
+
+<p><a href="https://www.cloudera.com/documentation/enterprise/5-6-x/topics/cm_mc_adding_hosts.html">Cloudera doc</a></p></li>
+</ul>
+
+
+<footer class=" footline" >
+	
+</footer>
+
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+        
+            <a class="nav nav-prev" href="/installation/" title="Installation"> <i class="fa fa-chevron-left"></i></a>
+        
+        
+            <a class="nav nav-next" href="/configuration/" title="Configuration" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+        
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1510589202"></script>
+    <script src="/js/perfect-scrollbar.min.js?1510589202"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1510589202"></script>
+    <script src="/js/jquery.sticky-kit.min.js?1510589202"></script>
+    <script src="/js/featherlight.min.js?1510589202"></script>
+    <script src="/js/html5shiv-printshiv.min.js?1510589202"></script>
+    <script src="/js/highlight.pack.js?1510589202"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom.71422.js?1510589202"></script>
+    <script src="/js/learn.js?1510589202"></script>
+    <script src="/js/hugo-learn.js?1510589202"></script>
+
+    <link href="/mermaid/mermaid.css?1510589202" type="text/css" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1510589202"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <center>
+  <footer class="site-footer">
+    <span class="site-footer-credits"> </span><a href="http://www.seeburger.de/webseiten-nutzungsbedingungen.html">Webseiten-Nutzungsbedingungen</a><span> &#124; </span><a href="http://www.seeburger.de/datenschutz.html">Datenschutzerklärung</a><span> &#124; </span><a href="http://www.seeburger.de/impressum.html">Impressum</a> </span>
+  </footer>
+</center>
+
+  </body>
+</html>
+

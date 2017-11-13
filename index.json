@@ -1,0 +1,43 @@
+[
+{
+	"uri": "https://scray.github.io/installation/",
+	"title": "Installation",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://scray.github.io/installation/cdh5.13-ubuntu-16/",
+	"title": "Install CDH 5.13.0 on Ubuntu 16.04.2",
+	"tags": [],
+	"description": "",
+	"content": " Hosts\n   IP Hostname     10.0.0.1 node1   10.0.0.2 node2     Disable IPv6 Edit /etc/sysctl.conf and add this values\nnet.ipv6.conf.all.disable_ipv6 = 1 net.ipv6.conf.default.disable_ipv6 = 1 net.ipv6.conf.lo.disable_ipv6 = 1  Reload configuration\nsudo sysctl -p\n Configure hostnames  Edit on \u0026lsquo;node1\u0026rsquo; and \u0026lsquo;node2\u0026rsquo; /etc/hosts.\nAdd:\n 10.0.0.1 node1 10.0.0.1 node2   ### Install Java 8  sudo add-apt-repository ppa:webupd8team/java sudo apt-get update sudo apt-get install oracle-java8-installer sudo apt-get install oracle-java8-set-default  Install Cloudera MANAGER on \u0026lsquo;node1\u0026rsquo;  Run:\n``` wget http://archive.cloudera.com/cm5/installer/latest/cloudera-manager-installer.bin chmod u+x cloudera-manager-installer.bin sudo ./cloudera-manager-installer.bin ```   Connect to WebUI\n Host: 10.0.0.1 User: admin Password: admin  Update Java Home Directory in CDH Manager Cloudere doc\n Add host2 Cloudera doc\n  "
+},
+{
+	"uri": "https://scray.github.io/configuration/",
+	"title": "Configuration",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://scray.github.io/",
+	"title": "",
+	"tags": [],
+	"description": "",
+	"content": " Scray - A Serving-Layer Framework for \u0026ldquo;BigData\u0026rdquo; A typical big-data application requires a serving layer, which will serve processed data to applications. Typically this will be either a report-generator or an interactive multi-user web-application. Interactive multi-user web-application applications usually have requirements similar to near-real-time-systems, with degrading deadlines in the order of seconds. This framework strives to support development of such applications by providing abstractions typically used in conjunction with datastores (NoSQL, as well as SQL) and lambda architectures.\n"
+},
+{
+	"uri": "https://scray.github.io/categories/",
+	"title": "Categories",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://scray.github.io/tags/",
+	"title": "Tags",
+	"tags": [],
+	"description": "",
+	"content": ""
+}]

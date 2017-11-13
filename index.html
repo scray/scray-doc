@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="generator" content="Hugo 0.30.2" />
+    <meta name="description" content="">
+
+
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+<link rel="icon" href="/images/favicon.png" type="image/x-icon" />
+
+    <title> :: Scray Documentation</title>
+    
+    
+    <link href="/css/nucleus.css?1510589202" rel="stylesheet">
+    <link href="/css/font-awesome.min.css?1510589202" rel="stylesheet">
+    <link href="/css/hybrid.css?1510589202" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1510589202" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1510589202" rel="stylesheet">
+    <link href="/css/auto-complete.css?1510589202" rel="stylesheet">
+    <link href="/css/theme.css?1510589202" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1510589202" rel="stylesheet">
+    
+      <link href="/css/theme-scray.css?1510589202" rel="stylesheet">
+    
+
+    <script src="/js/jquery-2.x.min.js?1510589202"></script>
+    
+    <style type="text/css">
+      :root #header + #content > #left > #rlblock_left{ 
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <html>
+<body>
+
+<img src="/images/scray-logo.svg" alt="Scray Logo">
+
+</body>
+</html>
+
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fa fa-search"></i></label>
+    <input data-search-input id="search-by" type="text" placeholder="Search...">
+    <span data-search-clear=""><i class="fa fa-close"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1510589202"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1510589202"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/scray.github.io\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1510589202"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/installation/" title="Installation" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/installation/">
+          Installation
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+          
+        
+          
+            
+            
+
+
+ 
+  
+    
+      <li data-nav-id="/installation/cdh5.13-ubuntu-16/" title="Install CDH 5.13.0 on Ubuntu 16.04.2" class="dd-item ">
+        <a href="/installation/cdh5.13-ubuntu-16/">
+        Install CDH 5.13.0 on Ubuntu 16.04.2
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/configuration/" title="Configuration" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/configuration/">
+          Configuration
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+
+    
+    <section id="footer">
+      <center>
+    <a class="github-button" href="https://github.com/scray/scray/archive/master.zip" data-icon="octicon-cloud-download" aria-label="Download /scray/scray on GitHub">Download</a>
+
+    <a class="github-button" href="https://github.com/scray/scray" data-icon="octicon-star" data-show-count="true" aria-label="Star https://github.com/scray/scray on GitHub">Star</a>
+
+    <a class="github-button" href="https://github.com/scray/scray/fork" data-icon="octicon-repo-forked" data-show-count="true" aria-label="Fork scray/scray on GitHub">Fork</a>
+
+    <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fa fa-heart"></i></a> from <a href="http://getgrav.org">Grav</a> and <a href="http://gohugo.io/">Hugo</a></p>
+</center>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable sticky-parent">
+              
+
+        
+        <div id="body-inner">
+          
+
+        
+
+<span id="sidebar-toggle-span">
+<a href="#" id="sidebar-toggle" data-sidebar-toggle=""><i class="fa fa-bars"></i> navigation</a>
+</span>
+
+ 
+
+
+<h1 id="scray-a-serving-layer-framework-for-bigdata">Scray - A Serving-Layer Framework for &ldquo;BigData&rdquo;</h1>
+
+<p>A typical big-data application requires a serving layer, which will serve processed data to applications. Typically this will be either a report-generator or an interactive multi-user web-application. Interactive multi-user web-application applications usually have requirements similar to near-real-time-systems, with degrading deadlines in the order of seconds. This framework strives to support development of such applications by providing abstractions typically used in conjunction with datastores (NoSQL, as well as SQL) and lambda architectures.</p>
+	
+  
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+        
+        
+            <a class="nav nav-next" href="/installation/" title="Installation" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+        
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1510589202"></script>
+    <script src="/js/perfect-scrollbar.min.js?1510589202"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1510589202"></script>
+    <script src="/js/jquery.sticky-kit.min.js?1510589202"></script>
+    <script src="/js/featherlight.min.js?1510589202"></script>
+    <script src="/js/html5shiv-printshiv.min.js?1510589202"></script>
+    <script src="/js/highlight.pack.js?1510589202"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom.71422.js?1510589202"></script>
+    <script src="/js/learn.js?1510589202"></script>
+    <script src="/js/hugo-learn.js?1510589202"></script>
+
+    <link href="/mermaid/mermaid.css?1510589202" type="text/css" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1510589202"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <center>
+  <footer class="site-footer">
+    <span class="site-footer-credits"> </span><a href="http://www.seeburger.de/webseiten-nutzungsbedingungen.html">Webseiten-Nutzungsbedingungen</a><span> &#124; </span><a href="http://www.seeburger.de/datenschutz.html">Datenschutzerklärung</a><span> &#124; </span><a href="http://www.seeburger.de/impressum.html">Impressum</a> </span>
+  </footer>
+</center>
+
+  </body>
+</html>
