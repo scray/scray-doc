@@ -1,35 +1,7 @@
 [
 {
-	"uri": "https://scray.github.io/scray-doc/installation/fff/ddd/rrr/rr2/",
-	"title": "Kapitel2",
-	"tags": [],
-	"description": "",
-	"content": ""
-},
-{
 	"uri": "https://scray.github.io/scray-doc/installation/",
 	"title": "Installation",
-	"tags": [],
-	"description": "",
-	"content": ""
-},
-{
-	"uri": "https://scray.github.io/scray-doc/installation/fff/",
-	"title": "Installation2",
-	"tags": [],
-	"description": "",
-	"content": ""
-},
-{
-	"uri": "https://scray.github.io/scray-doc/installation/fff/ddd/",
-	"title": "Installation3",
-	"tags": [],
-	"description": "",
-	"content": ""
-},
-{
-	"uri": "https://scray.github.io/scray-doc/installation/fff/ddd/rrr/",
-	"title": "Installation4",
 	"tags": [],
 	"description": "",
 	"content": ""
@@ -68,25 +40,4 @@
 	"tags": [],
 	"description": "",
 	"content": ""
-},
-{
-	"uri": "https://scray.github.io/scray-doc/installation/dd-1/",
-	"title": "page 1",
-	"tags": [],
-	"description": "This is a demo child page",
-	"content": "This is a demo child page\n"
-},
-{
-	"uri": "https://scray.github.io/scray-doc/installation/dd-1/dd-2/",
-	"title": "page 1",
-	"tags": [],
-	"description": "This is a demo child page",
-	"content": "This is a demo child page\n"
-},
-{
-	"uri": "https://scray.github.io/scray-doc/installation/dd-1/dd-2/dd-3/",
-	"title": "page 5",
-	"tags": [],
-	"description": "This is a demo child page",
-	"content": "This is a demo child page\n"
 }]

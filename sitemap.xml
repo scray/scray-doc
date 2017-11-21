@@ -3,24 +3,8 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://scray.github.io/scray-doc/installation/fff/ddd/rrr/rr2/</loc>
-  </url>
-  
-  <url>
     <loc>https://scray.github.io/scray-doc/installation/</loc>
     <lastmod>2017-11-13T11:32:26+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://scray.github.io/scray-doc/installation/fff/</loc>
-  </url>
-  
-  <url>
-    <loc>https://scray.github.io/scray-doc/installation/fff/ddd/</loc>
-  </url>
-  
-  <url>
-    <loc>https://scray.github.io/scray-doc/installation/fff/ddd/rrr/</loc>
   </url>
   
   <url>
@@ -46,18 +30,6 @@
   <url>
     <loc>https://scray.github.io/scray-doc/tags/</loc>
     <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://scray.github.io/scray-doc/installation/dd-1/</loc>
-  </url>
-  
-  <url>
-    <loc>https://scray.github.io/scray-doc/installation/dd-1/dd-2/</loc>
-  </url>
-  
-  <url>
-    <loc>https://scray.github.io/scray-doc/installation/dd-1/dd-2/dd-3/</loc>
   </url>
   
 </urlset>

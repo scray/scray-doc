@@ -12,15 +12,6 @@
     
     
     <item>
-      <title>Kapitel2</title>
-      <link>https://scray.github.io/scray-doc/installation/fff/ddd/rrr/rr2/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://scray.github.io/scray-doc/installation/fff/ddd/rrr/rr2/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Install CDH 5.13.0 on Ubuntu 16.04.2</title>
       <link>https://scray.github.io/scray-doc/installation/cdh5.13-ubuntu-16/</link>
       <pubDate>Mon, 13 Nov 2017 11:32:26 +0100</pubDate>
