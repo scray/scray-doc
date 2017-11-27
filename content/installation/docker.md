@@ -17,13 +17,15 @@ $ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ub
 
 (2) Install Docker CE
 
-$ sudo apt-get update
-$ sudo apt-get install docker-ce
+```
+sudo apt-get update
+sudo apt-get install docker-ce
+```
 
 (3) Verify the installation
-
-$ sudo docker run hello-world
-
+```
+sudo docker run hello-world
+```
 
 
 
