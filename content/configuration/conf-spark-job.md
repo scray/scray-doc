@@ -49,19 +49,19 @@ cd ~/git/scray/scray-example/spark-job/facility-state-job/
 ### Job source and sink configuration
 
 * **Facility data are consumed from an Kafka broker**   
-    Kafka broker is configured in ```conf/facility-state-job.conf```   
+    Kafka broker is configured in ```conf/facility-state-job.yaml```   
     E.g.
   
     ```
-    "kafkaBootstrapServers": "192.0.2.1:9092",
-    "kafkaTopic": "facility",
+    kafkaBootstrapServers: 192.0.2.1:9092
+    kafkaTopic: facility
     ```
 * **In this example results are written to Graphite**  
-    Graphite hosts in configured in ```conf/facility-state-job.conf```  
+    Graphite hosts in configured in ```conf/facility-state-job.yaml```  
     E.g.
 
     ```
-    "graphiteHost":  "192.0.2.1"
+    graphiteHost:  192.0.2.1
     ```
 
 ### Execution environement configuration  
