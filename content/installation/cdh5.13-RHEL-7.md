@@ -6,6 +6,9 @@ draft: false
 
 ```
 ssh-keygen
+```
+
+```
 cd ~/.ssh
 chmod 700 ~/.ssh
 chmod 600 ~/.ssh/*
@@ -13,10 +16,13 @@ chmod 600 ~/.ssh/*
 
 Configure passwordless SSH for root user
 ```
-ssh-copy-id -i ~/.ssh/id_rsa.pub root@10.11.22.33
+ssh-copy-id -i ~/.ssh/id_rsa.pub root@host2
 ```
+https://www.digitalocean.com/community/questions/ssh-failed-permission-denied-publickey-gssapi-keyex-gssapi-with-mic
+
 
 install Java 8
+http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 ```
 rpm -i jdk-8u151-linux-x64.rpm 
 ```
@@ -25,6 +31,13 @@ Find the IP address, FQDN and shortname for each of nodes and add them to the /e
 <IP address> <FQDN> <shortname>
 To get shortname and FQDN:
 >hostname && hostname -f
+
+http://www.servermom.org/setup-fqdn-hostname-centos-server/
+
+```
+hostnamectl set-hostname host2.scray.org
+
+```
 
 Edit the  ```/etc/hosts``` file and distribute it to all hosts
 
@@ -95,7 +108,8 @@ sudo service cloudera-scm-server status
 Ok, ready for the installation. Here are the steps.
 1. Download and Run the Cloudera Manager Server Installer
 Logon as root user on vmhost1. All of the installations are under root user.
-Run the following commands.
+
+Run the following commands at the manager's host.
 
 ```
 wget http://archive.cloudera.com/cm5/installer/latest/cloudera-manager-installer.bin
@@ -103,12 +117,71 @@ chmod u+x cloudera-manager-installer.bin
 ./cloudera-manager-installer.bin
 ```
 
-choose parcels
+```
+host1.scray.org:7180
+```
+
+```
+ssh -L 7180:localhost:7180 root@10.15.24.228
+```
+accept the licence
+continue with
+"Cloudera Enterprise
+Cloudera Enterprise Trial"
+
+press continue
+
+Specify hosts for your CDH cluster installation. You can use patterns, e.g.
+```
+host[1-2]
+```
+
+stick with parcels and none for the rest. Just press continue.
+
+At the fourth screen enter the root password
+
+At screen 5 wait for the packages to be installed.
+
+It says in details, but installation was succesful:
+"Loaded plugins: fastestmirror
+Error: No matching Packages to list"
+
+* ### Cluster Setup
+
+Next is the Cluster Setup
+Choose the CDH 5 services that you want to install on your cluster.
+
+So I chose Custom Services and chose the services mainly from Core with Impala + Spark. Make sure to check Include Cloudera Navigator.
+
+choose HDFS, YARN, Zookepper
+
+at the next screen I chose "All Hosts" for Datanode and default for the rest. Then continue.
+
+At the next screen hit "Test connection" and continue.
+
+At the next screen you have to review the cluster setup. Especially take care there is enough space in the data directories. E.g. if you have an own data partiotion for your linux installation you should change the /dfs/... to e.g. /home/dfs .
+
+At step 5 it will start all the services. All should be green.
+
+Finally "Finish". You get to the main screen and see your "Cluster 1" with all the services installed.
+
+```
+alternatives --list | fgrep java
+```
 
 Configuring a Custom Java Home Location
 https://www.cloudera.com/documentation/enterprise/5-3-x/topics/cm_ig_java_home_location.html#cmig_topic_16
 
+Select "All hosts" in the "Hosts" menu. 
+Click the "Configuration" button in the top area.
+Click the category "Advanced" in the left sidebar. 
 
+In the Advanced category, click the Java Home Directory property.
+Set the property to the custom location e.g. "/usr/java/jdk1.8.0_152/jre/"
+Click Save Changes.
+Go to the main page and restart all services by clicking "Restart" in the menu right to "Cluster 1".
+
+The Cloudera Management service needs also to be restarted. "Stale configuration"
 
 * ### Cleanup a host
 

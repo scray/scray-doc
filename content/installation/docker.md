@@ -27,9 +27,17 @@ sudo apt-get install docker-ce
 sudo docker run hello-world
 ```
 
+Centos / Rhel7 
 
+https://stackoverflow.com/questions/42981114/install-docker-ce-17-03-on-rhel7
 
 ```
+sudo yum install -y yum-utils
+sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+sudo yum makecache fast
+sudo yum -y install docker-ce
+sudo systemctl start docker
+sudo docker run hello-world
 ```
 
 ```

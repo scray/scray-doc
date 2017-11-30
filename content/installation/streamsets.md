@@ -32,45 +32,31 @@ Go to Parcels / Configuration and add the following URL to the parcel settings b
 http://archives.streamsets.com/datacollector/3.0.0.0/parcel/
 ```
 
-Now you can distribute and activate the parcel
-
-
+Now you can download, distribute and activate the parcel.
 
 Note: If you are using a docker container or some local computer and you want to access services from your cluster the hosts need to be provided in the /etc/hosts.
 
+Add a streamsets service to "Cluster 1"
+
+Click "Streamsets" in "Cluster 1" and then "Data Clollectors Web UI"
+or point your browser directly to ```http://host1.scray.org:18630/```
+
+```
+cd /root/scray/scray-example/pipelines/streamsets
+curl -X POST -H "Content-Type: application/json" -d "@./CologneElevators.json" "http://streamsets:18630/rest/v1/pipeline/CologneElevators/import" \
+-u admin:admin -H "X-Requested-By:myapp"
+curl -X POST -H "Content-Type: application/json" -d "@./BahnFacilities.json" "http://streamsets:18630/rest/v1/pipeline/BahnFacilities/import" \
+-u admin:admin -H "X-Requested-By:myapp"
+```
 
 * For the example: 
 
 ```
 sudo su - hdfs
-/usr/bin/hdfs dfs -mkdir hdfs://bdq-cassandra4.seeburger.de:8020/data
-/usr/bin/hdfs dfs -chown sdc hdfs://bdq-cassandra4.seeburger.de:8020/data
-/usr/bin/hdfs dfs -ls hdfs://bdq-cassandra4.seeburger.de:8020/
+/usr/bin/hdfs dfs -mkdir hdfs://hdfs-namenode:8020/data
+/usr/bin/hdfs dfs -chown sdc hdfs://hdfs-namenode:8020/data
+/usr/bin/hdfs dfs -ls hdfs://hdfs-namenode:8020/
 ```
-
-
-https://www.cloudera.com/documentation/enterprise/5-8-x/topics/admin_hdfs_proxy_users.html
-
-https://ask.streamsets.com/question/31/error-in-hadoop-fs-destination-user-sdc-is-not-allowed-to-impersonate-hadoop/
-
-Use the cloudera manager and put the following sniplet
-
-
-```
-<property>
-  <name>hadoop.proxyuser.sdc.hosts</name>
-  <value>*</value>
-</property>
-<property>
-  <name>hadoop.proxyuser.sdc.groups</name>
-  <value>*</value>
-</property>
-```
-
-in
-HDFS Service->Configuration->Service-Wide-Advanced->Cluster-wide Advanced Configuration Snippet (Safety Valve) for core-site.xml:
-
-Then restart those services and they'll grab that entry from that configuration.
 
 
 The provided pipelines require at minimum streamsets version 3.0.0
@@ -85,10 +71,10 @@ curl -X POST -H "Content-Type: application/json" -d "@./Bahn3-v1b.json" "http://
 To backup the pipelines:
 
 ```
-curl -X GET "http://streamsets:18630/rest/v1/pipeline/CologneElevators/export?rev=0" -u admin:admin -H "X-Requested-By:myapp" \
+curl -X GET "http://streamsets:18630/rest/v1/pipeline/CologneElevators/export" -u admin:admin -H "X-Requested-By:myapp" \
 > ./CologneElevators.json
-curl -X GET "http://streamsets:18630/rest/v1/pipeline/Bahn3-v1b/export?rev=0" -u admin:admin -H "X-Requested-By:myapp" \
-> ./Bahn3-v1b.json
+curl -X GET "http://streamsets:18630/rest/v1/pipeline/BahnFacilities/export" -u admin:admin -H "X-Requested-By:myapp" \
+> ./BahnFacilities.json
 ```
 
 * To get the REST API click the questionmark (help) in the right upper corner and then RESTful API
@@ -128,3 +114,28 @@ curl -X DELETE "http://streamsets:18630/rest/v1/pipeline/tmp" -u admin:admin -H 
 
 ```
 ```
+
+
+https://www.cloudera.com/documentation/enterprise/5-8-x/topics/admin_hdfs_proxy_users.html
+
+https://ask.streamsets.com/question/31/error-in-hadoop-fs-destination-user-sdc-is-not-allowed-to-impersonate-hadoop/
+
+Use the cloudera manager and put the following sniplet
+
+
+```
+<property>
+  <name>hadoop.proxyuser.sdc.hosts</name>
+  <value>*</value>
+</property>
+<property>
+  <name>hadoop.proxyuser.sdc.groups</name>
+  <value>*</value>
+</property>
+```
+
+in
+HDFS Service->Configuration->Service-Wide-Advanced->Cluster-wide Advanced Configuration Snippet (Safety Valve) for core-site.xml:
+
+Then restart those services and they'll grab that entry from that configuration.
+
