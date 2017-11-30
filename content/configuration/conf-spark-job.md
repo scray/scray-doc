@@ -33,7 +33,7 @@ In this example we assume that the folowing hostnames are available on all hosts
 
 * Build job
     ```
-    cd =~/git/scray/scray-example/spark-job/facility-state-job/
+    cd ~/git/scray/scray-example/spark-job/facility-state-job/
     mvn package
     ```  
 
