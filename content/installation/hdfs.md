@@ -4,6 +4,9 @@ date: 2017-11-13T11:32:26+01:00
 draft: false 
 ---
 
+```
+sudo -u hdfs hadoop fs -chmod -R 777 /
+```
 
 If you need to format the namenode
 ```
