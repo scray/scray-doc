@@ -10,6 +10,10 @@ Start a grafana container. Open a webbrowser. Login as admin/admin.
 sudo docker run -d --name=grafana -p 3001:3000 grafana/grafana
 ```
 
+Point your webbrowser to
+http://host1.scray.org:3002
+Attention use the full name, not localhost
+
 Start a graphite container.
 https://graphite.readthedocs.io/en/latest/install.html#docker
 ```
@@ -82,8 +86,17 @@ curl -X GET  "http://admin:admin@localhost:3001/api/datasources/name/DEMO" > ds1
 ```
 
 ```
+WATCHCONT=$(sudo docker ps | fgrep grafana | cut -d' ' -f1)
+echo $WATCHCONT
+IP=$(sudo docker inspect $WATCHCONT | fgrep IPAddress | cut -d':' -f2 | cut -d'"' -f2)
+echo $IP
+#ssh root@$IP
+sudo docker exec -i -t $WATCHCONT /bin/bash
+
 ```
 
+```
+getent hosts graphite-host | awk '{ print $1 }'
 ```
 
 http://docs.grafana.org/http_api/dashboard/
@@ -92,3 +105,5 @@ https://stackoverflow.com/questions/31166932/create-grafana-dashboards-with-api
 ```
 curl -X GET  "http://admin:admin@10.11.22.36:3001/api/dashboards/db/bahn" > bahn.json
 ```
+
+https://www.howtoforge.com/tutorial/how-to-install-grafana-on-linux-servers/
