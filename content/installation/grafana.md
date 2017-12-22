@@ -105,3 +105,5 @@ https://stackoverflow.com/questions/31166932/create-grafana-dashboards-with-api
 ```
 curl -X GET  "http://admin:admin@10.11.22.36:3001/api/dashboards/db/bahn" > bahn.json
 ```
+
+https://www.howtoforge.com/tutorial/how-to-install-grafana-on-linux-servers/

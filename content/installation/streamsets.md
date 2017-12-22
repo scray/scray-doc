@@ -105,9 +105,12 @@ curl -X DELETE "http://streamsets:18630/rest/v1/pipeline/tmp" -u admin:admin -H 
 
 ```
 ```
-
+For debugging use
 ```
+nc -l localhost 5000
 ```
+output should be e.g.
+"bahn.equipment.type.ELEVATOR.all.state.ACTIVE.count" 1983 1513878120
 
 ```
 ```

@@ -41,6 +41,8 @@ sudo docker run hello-world
 ```
 
 ```
+WATCHCONT=$(sudo docker ps | fgrep streamsets | cut -d' ' -f1)
+sudo docker exec -i -t $WATCHCONT /bin/bash
 ```
 
 ```

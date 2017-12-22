@@ -23,3 +23,5 @@ start hdfs service
 ```
 /usr/bin/hdfs dfsadmin -safemode leave
 ```
+
+http://blog.cloudera.com/blog/2012/05/namenode-recovery-tools-for-the-hadoop-distributed-file-system/

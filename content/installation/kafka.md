@@ -25,9 +25,9 @@ https://community.cloudera.com/t5/Cloudera-Manager-Installation/adding-a-Kafka-s
 
 Continue .....
 
-
+```
 /usr/bin/kafka-topics --list --zookeeper bdq-cassandra5:2181
 /usr/bin/kafka-topics --create --zookeeper bdq-cassandra5:2181 --replication-factor 1 --partitions 1 --topic facility
 /usr/bin/kafka-console-producer --broker-list 10.11.22.34:9092 --topic aufzug
 /usr/bin/kafka-console-consumer --zookeeper bdq-cassandra5:2181 --topic aufzug
-  
+```
