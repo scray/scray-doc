@@ -4,6 +4,8 @@ date: 2017-11-13T11:32:26+01:00
 draft: false 
 ---
 
+### tmp
+
 https://www.hyperledger.org/
 https://www.hyperledger.org/blog/2017/11/29/build-it-on-blockchain-a-sustainable-palm-oil-industry
 
@@ -97,9 +99,7 @@ composer network start --card PeerAdmin@hlfv1 --networkAdmin admin --networkAdmi
 
 https://hyperledger.github.io/composer/integrating/getting-started-rest-api.html
 
-```
-
-* iot
+### IOT
 
 https://www.ibm.com/developerworks/cloud/library/cl-deploy-interact-extend-local-blockchain-network-with-hyperledger-composer/index.html
 
@@ -127,8 +127,11 @@ ssh -L 9999:localhost:3000 ubuntu@10.15.24.231
 composer transaction submit --card admin@iot-perishable-network-advanced -d '{ "$class": "org.acme.shipping.perishable.TemperatureReading", "centigrade": 0, "shipment": "resource:org.acme.shipping.perishable.Shipment#SHIP_001"}'
 
 composer identity issue --card admin@iot-perishable-network-advanced --file ID_CARD_FILE --newUserId IDENTITY --participantId 'resource:org.acme.shipping.perishable.PARTICIPANT#PARTICIPANT_ID'
+```
 
-* issue user and import card
+#### issue user and import card
+
+
 ```
 composer identity issue --card admin@iot-perishable-network-advanced --file grower1.card --newUserId grower1 --participantId 'resource:org.acme.shipping.perishable.Grower#farmer@email.com'
 
@@ -148,7 +151,7 @@ composer card import --file sensor_gps1.card
 
 ```
 
-* submit transactions
+#### submit transactions
 ```
 composer transaction submit --card grower1@iot-perishable-network-advanced -d '{"$class": "org.acme.shipping.perishable.ShipmentPacked", "shipment": "resource:org.acme.shipping.perishable.Shipment#SHIP_001"}'
 
@@ -183,21 +186,30 @@ curl -X POST --header 'Content-Type: application/json' --header 'Accept: applica
  
 ```
 
-
+#### node red
 
 https://medium.com/@CazChurchUk/integrate-your-blockchain-with-anything-using-hyperledger-composer-and-nodered-4226676f7e54
 
 https://www.ibm.com/developerworks/cloud/library/cl-deploy-interact-extend-local-blockchain-network-with-hyperledger-composer/index.html?ca=drs-
 
-npm install
+https://nodered.org/docs/getting-started/installation
 
 
 ```
+sudo apt-get install nodejs 
+sudo apt-get install npm 
+sudo npm install -g --unsafe-perm node-red
+sudo rm -rf /usr/local/lib/node_modules/npm-check-updates/ 
+
+/home/ubuntu/.nvm/versions/node/v8.9.2/bin/node-red
+ssh -L 1880:localhost:1880 ubuntu@10.15.24.231
+```
 
 ```
-```
 
 ```
+
+
 https://stackoverflow.com/questions/47668922/what-is-the-relation-between-fabric-composer-cello-and-other-hyperledger
 
 Fabric provides a framework to set up a blockchain network. It is data/application agnostic.
