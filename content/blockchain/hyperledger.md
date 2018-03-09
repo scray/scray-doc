@@ -118,16 +118,30 @@ composer network deploy -a dist/iot-perishable-network-advanced.bna -A admin -S 
 composer card import --file networkadmin.card
 
 composer card list
+composer network ping --card admin@iot-perishable-network-advanced
+
+
 composer-rest-server
 
 ssh -L 9999:localhost:3000 ubuntu@10.15.24.231
 ```
 
 ```
+composer transaction submit --card admin@iot-perishable-network-advanced -d '{"$class": "org.acme.shipping.perishable.SetupDemo"}'
+```
+
+
+```
 composer transaction submit --card admin@iot-perishable-network-advanced -d '{ "$class": "org.acme.shipping.perishable.TemperatureReading", "centigrade": 0, "shipment": "resource:org.acme.shipping.perishable.Shipment#SHIP_001"}'
 
-composer identity issue --card admin@iot-perishable-network-advanced --file ID_CARD_FILE --newUserId IDENTITY --participantId 'resource:org.acme.shipping.perishable.PARTICIPANT#PARTICIPANT_ID'
+composer transaction submit --card admin@iot-perishable-network-advanced -d '{ "$class": "org.acme.shipping.perishable.ShipmentReceived", "shipment": "resource:org.acme.shipping.perishable.Shipment#SHIP_001"}'
+
+
+# composer identity issue --card admin@iot-perishable-network-advanced --file ID_CARD_FILE --newUserId IDENTITY --participantId 'resource:org.acme.shipping.perishable.PARTICIPANT#PARTICIPANT_ID'
 ```
+
+# composer transaction submit --card admin@iot-perishable-network-advanced -d '{}' 'http://localhost:9999/api/org.acme.shipping.perishable.SetupDemo'
+
 
 #### issue user and import card
 
@@ -158,13 +172,23 @@ composer transaction submit --card grower1@iot-perishable-network-advanced -d '{
 composer transaction submit --card shipper1@iot-perishable-network-advanced -d '{"$class": "org.acme.shipping.perishable.ShipmentPacked", "shipment": "resource:org.acme.shipping.perishable.Shipment#SHIP_001"}'
 
 
+composer transaction submit --card shipper1@iot-perishable-network-advanced -d '{"$class": "org.acme.shipping.perishable.ShipmentPickup", "shipment": "resource:org.acme.shipping.perishable.Shipment#SHIP_001"}'
+
+composer transaction submit --card shipper1@iot-perishable-network-advanced -d '{"$class": "org.acme.shipping.perishable.ShipmentLoaded", "shipment": "resource:org.acme.shipping.perishable.Shipment#SHIP_001"}'
+
+
 composer transaction submit --card sensor_temp1@iot-perishable-network-advanced -d '{ "$class": "org.acme.shipping.perishable.TemperatureReading", "centigrade": 2, "shipment": "resource:org.acme.shipping.perishable.Shipment#SHIP_001"}'
  
-composer transaction submit --card sensor_temp1@iot-perishable-network-advanced -d '{ "$class": "org.acme.shipping.perishable.TemperatureReading", "centigrade": 11, "shipment": "resource:org.acme.shipping.perishable.Shipment#SHIP_001"}'
+composer transaction submit --card sensor_temp1@iot-perishable-network-advanced -d '{ "$class": "org.acme.shipping.perishable.TemperatureReading", "centigrade": 3, "shipment": "resource:org.acme.shipping.perishable.Shipment#SHIP_001"}'
 
+composer transaction submit --card sensor_gps1@iot-perishable-network-advanced -d '{"$class": "org.acme.shipping.perishable.GpsReading", "readingTime": "2200", "readingDate": "20171118", "latitude": "40.6840", "latitudeDir": "N", "longitude": "74.0062", "longitudeDir": "W", "shipment": "resource:org.acme.shipping.perishable.Shipment#SHIP_001"}' 
+
+composer transaction submit --card importer1@iot-perishable-network-advanced -d '{"$class": "org.acme.shipping.perishable.ShipmentReceived", "shipment": "resource:org.acme.shipping.perishable.Shipment#SHIP_001"}'
 
 ```
+composer-rest-server
 
+curl -X GET --header 'Accept: application/json' 'http://host1.scray.org:9000/api/org.acme.shipping.perishable.Shipment'
 
 
 ```
