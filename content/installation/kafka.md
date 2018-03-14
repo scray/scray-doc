@@ -13,8 +13,11 @@ https://www.cloudera.com/documentation/enterprise/latest/topics/cm_ig_parcels.ht
 
 Click the parcels icon. Then the "Configuration" button. Click a "+" and paste the following repository. Save the changes and the 2.1.1 Parcel should show up. Click "Download", then "Distribute" and "Activate".
 
+Kafka different versions at:
+https://www.cloudera.com/documentation/kafka/latest/topics/kafka_packaging.html
+
 ```
-https://archive.cloudera.com/kafka/parcels/2.1.1/
+https://archive.cloudera.com/kafka/parcels/2.2.0/
 ```
 
 Add a Kafka service to "Cluster 1" at the main page. Configure the service and select a host for the broker.

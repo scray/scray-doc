@@ -6,15 +6,15 @@ draft: false
 
 
 
-https://streamsets.com/documentation/datacollector/3.0.0.0/help/#Installation/Install_title.html
+https://streamsets.com/documentation/datacollector/3.1.0.0/help/#Installation/Install_title.html
 
 
 
 
 ```
-wget https://archives.streamsets.com/datacollector/3.0.0.0/csd/STREAMSETS-3.0.0.0.jar
+wget https://archives.streamsets.com/datacollector/3.1.0.0/csd/STREAMSETS-3.1.0.0.jar
 
-mv ./STREAMSETS-3.0.0.0.jar /opt/cloudera/csd
+mv ./STREAMSETS-3.1.0.0.jar /opt/cloudera/csd
 chown cloudera-scm:cloudera-scm /opt/cloudera/csd/STREAMSETS*.jar
 chmod 644 /opt/cloudera/csd/STREAMSETS*.jar
 systemctl restart cloudera-scm-server
@@ -29,7 +29,7 @@ In Cloudera Manager admin console I added the following url to the parcel settin
 Go to Parcels / Configuration and add the following URL to the parcel settings by clicking a (+) icon. Then save the settings
 
 ```
-http://archives.streamsets.com/datacollector/3.0.0.0/parcel/
+http://archives.streamsets.com/datacollector/3.1.0.0/parcel/
 ```
 
 Now you can download, distribute and activate the parcel.

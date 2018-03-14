@@ -20,6 +20,18 @@ Configure passwordless SSH for root user
 ```
 ssh-copy-id -i ~/.ssh/id_rsa.pub root@host2
 ```
+
+
+nano /etc/ssh/sshd_config
+
+PermitRootLogin yes
+PasswordAuthentication yes
+
+service sshd restart
+
+
+https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/v2v_guide/preparation_before_the_p2v_migration-enable_root_login_over_ssh
+
 https://www.digitalocean.com/community/questions/ssh-failed-permission-denied-publickey-gssapi-keyex-gssapi-with-mic
 
 
@@ -184,6 +196,10 @@ Click Save Changes.
 Go to the main page and restart all services by clicking "Restart" in the menu right to "Cluster 1".
 
 The Cloudera Management service needs also to be restarted. "Stale configuration"
+
+search for and check the box 
+dfs.datanode.use.datanode.hostname
+dfs.client.use.datanode.hostname
 
 * ### Cleanup a host
 
