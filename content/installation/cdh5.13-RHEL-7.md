@@ -5,6 +5,12 @@ draft: false
 ---
 
 
+```
+sudo yum install epel-release
+sudo yum install emacs
+```
+
+
 
 ```
 ssh-keygen
