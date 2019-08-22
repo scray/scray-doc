@@ -128,6 +128,7 @@ ssh -L 9999:localhost:3000 ubuntu@10.15.24.231
 
 ```
 composer transaction submit --card admin@iot-perishable-network-advanced -d '{"$class": "org.acme.shipping.perishable.SetupDemo"}'
+
 ```
 
 
