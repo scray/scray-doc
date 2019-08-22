@@ -4,13 +4,15 @@ date: 2017-11-13T11:32:26+01:00
 draft: false 
 ---
 
+https://www.cloudera.com/documentation/enterprise/6/6.3.html
+
 
 ```
 sudo yum -y install epel-release
 sudo yum -y install emacs
 ```
 
-
+sudo su -
 as root
 ```
 ssh-keygen
@@ -52,13 +54,17 @@ hostnamectl set-hostname host2.scray.org
 Fora ll hosts:
 
 set a password for root
+```
 passwd
+```
 
 Configure passwordless SSH for root user
 ```
 ssh-copy-id -i ~/.ssh/id_rsa.pub root@host2
 ```
 
+
+https://www.cloudera.com/documentation/enterprise/6/6.3/topics/configure_network_names.html#configure_network_names
 
 
 Edit the  ```/etc/hosts``` file and distribute it to all hosts
@@ -69,16 +75,32 @@ Edit the  ```/etc/hosts``` file and distribute it to all hosts
 10.11.22.32 bdq-cassandra2.seeburger.de bdq-cassandra2
 ```
 
+check
+wget -qO- -T 1 -t 1 http://169.254.169.254/latest/meta-data/public-hostname && /bin/echo
+
+
 scp /etc/hosts host3:/etc/hosts
 
+step 3 of the cloudera guide
 
-install Java 8
-http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+
+https://www.cloudera.com/documentation/enterprise/6/6.3/topics/install_cdh_disable_iptables.html#install_cdh_disable_iptables
+
+
+Check, if there is a firewall
+iptables -L
+
+Only if the response does not say policy ACCEPT
+Disable firewall
+
 ```
-rpm -i jdk-8u151-linux-x64.rpm 
+systemctl disable firewalld
+systemctl stop firewalld
+systemctl status firewalld
 ```
 
 
+https://www.cloudera.com/documentation/enterprise/6/6.3/topics/install_cdh_disable_selinux.html#install_cdh_disable_selinux
 
 * ### Set SELinux policy to diasabled.
 
@@ -98,14 +120,36 @@ Edit /etc/selinux/config
 #SELINUXTYPE=targeted 
 SELINUX=disabled
 ```
+copy file to other hosts
+scp /etc/selinux/config cloudera-2:/etc/selinux/config
 
-Disable firewall
 
+NTP
+https://www.cloudera.com/documentation/enterprise/6/6.3/topics/install_cdh_enable_ntp.html#install_cdh_enable_ntp
 ```
-systemctl disable firewalld
-systemctl stop firewalld
-systemctl status firewalld
+yum -y install ntp
 ```
+
+step 2, you can also add your local server
+copy file to other hosts
+scp /etc/ntp.conf cloudera-2:/etc/ntp.conf
+
+step 3-6
+```
+sudo systemctl start ntpd
+sudo systemctl enable ntpd
+ntpdate -u seeburger.de
+hwclock --systohc
+date
+```
+
+if required set your timezone
+```
+sudo timedatectl set-timezone Europe/Berlin
+timedatectl status # for debug
+date
+```
+
 
 Set swappiness to 0 / Disable IPV6
 Edit /etc/sysctl.conf
@@ -116,10 +160,19 @@ net.ipv6.conf.default.disable_ipv6 = 1
 net.ipv6.conf.all.disable_ipv6 = 1
 ```
 
+copy to other hosts
+```
+ scp /etc/sysctl.conf cloudera-2:/etc/sysctl.conf
+```
+
 restart
 ```
 shutdown -r now
 ```
+
+yum -y install wget
+
+
 
 * 
 
@@ -138,6 +191,104 @@ sudo service cloudera-scm-server stop
 sudo service cloudera-scm-server status
 
 
+
+
+
+https://www.cloudera.com/documentation/enterprise/6/6.3/topics/install_cm_cdh.html
+
+Configure a Repository for Cloudera Manager
+https://www.cloudera.com/documentation/enterprise/6/6.3/topics/configure_cm_repo.html#cm_repo
+
+check for repo https://www.cloudera.com/documentation/enterprise/6/release-notes/topics/rg_cm_6_version_download.html
+
+```
+sudo wget https://archive.cloudera.com/cm6/6.3.0/redhat7/yum/cloudera-manager.repo  -P /etc/yum.repos.d/
+sudo rpm --import https://archive.cloudera.com/cm6/6.3.0/redhat7/yum/RPM-GPG-KEY-cloudera
+```
+
+Install Java Development Kit
+https://www.cloudera.com/documentation/enterprise/6/6.3/topics/cdh_ig_jdk_installation.html#topic_29
+
+
+
+install Java 8
+http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+https://www.oracle.com/technetwork/java/javase/downloads/java-archive-javase8-2177648.html?printOnly=1
+https://www.digitalocean.com/community/tutorials/how-to-install-java-on-centos-and-fedora
+
+ scp ./jdk-8u181-linux-x64.rpm cloudera-3:
+```
+rpm -i jdk-8u181-linux-x64.rpm
+```
+
+Step 3: Install Cloudera Manager Server
+https://www.cloudera.com/documentation/enterprise/6/6.3/topics/install_cm_server.html#install_cm_server
+```
+sudo yum -y install cloudera-manager-daemons cloudera-manager-agent cloudera-manager-server
+sudo JAVA_HOME=/usr/java/jdk1.8.0_181-amd64 /opt/cloudera/cm-agent/bin/certmanager setup --configure-services
+```
+
+Install and Configure PostgreSQL for Cloudera Software
+https://www.cloudera.com/documentation/enterprise/6/6.3/topics/cm_ig_extrnl_pstgrs.html#cmig_topic_5_6
+
+```
+sudo -y yum install postgresql-server
+sudo yum install python-pip
+sudo pip install psycopg2==2.7.5 --ignore-installed
+
+echo 'LC_ALL="en_US.UTF-8"' >> /etc/locale.conf
+sudo su -l postgres -c "postgresql-setup initdb"
+
+emacs /var/lib/pgsql/data/pg_hba.conf
+emacs /var/lib/pgsql/data/postgresql.conf
+sudo systemctl enable postgresql
+sudo systemctl restart postgresql
+
+sudo -u postgres psql
+
+CREATE ROLE scm LOGIN PASSWORD '<password>';
+CREATE DATABASE scm OWNER scm ENCODING 'UTF8';
+CREATE ROLE amon LOGIN PASSWORD '<password>';
+CREATE DATABASE amon OWNER amon ENCODING 'UTF8';
+CREATE ROLE rman  LOGIN PASSWORD '<password>';
+CREATE DATABASE rman OWNER rman ENCODING 'UTF8';
+CREATE ROLE hue  LOGIN PASSWORD '<password>';
+CREATE DATABASE hue  OWNER hue ENCODING 'UTF8';
+CREATE ROLE metastore  LOGIN PASSWORD '<password>';
+CREATE DATABASE metastore  OWNER metastore ENCODING 'UTF8';
+CREATE ROLE sentry LOGIN PASSWORD '<password>';
+CREATE DATABASE sentry  OWNER sentry ENCODING 'UTF8';
+CREATE ROLE nav LOGIN PASSWORD '<password>';
+CREATE DATABASE nav OWNER nav ENCODING 'UTF8';
+CREATE ROLE navms LOGIN PASSWORD '<password>';
+CREATE DATABASE navms OWNER navms ENCODING 'UTF8';
+CREATE ROLE oozie LOGIN PASSWORD '<password>';
+CREATE DATABASE oozie OWNER oozie ENCODING 'UTF8';
+
+ALTER DATABASE metastore SET standard_conforming_strings=off;
+ALTER DATABASE oozie SET standard_conforming_strings=off;
+```
+
+Step 5: Set up the Cloudera Manager Database
+https://www.cloudera.com/documentation/enterprise/6/6.3/topics/prepare_cm_database.html
+```
+sudo /opt/cloudera/cm/schema/scm_prepare_database.sh postgresql scm scm
+```
+
+Step 6: Install CDH and Other Software
+https://www.cloudera.com/documentation/enterprise/6/6.3/topics/install_software_cm_wizard.html#cm_installation_wizard
+
+```
+sudo systemctl start cloudera-scm-server
+sudo tail -f /var/log/cloudera-scm-server/cloudera-scm-server.log
+```
+
+```
+cloudera-1.research.dev.seeburger.de:7180
+```
+
+
+
 Ok, ready for the installation. Here are the steps.
 1. Download and Run the Cloudera Manager Server Installer
 Logon as root user on vmhost1. All of the installations are under root user.
@@ -145,6 +296,7 @@ Logon as root user on vmhost1. All of the installations are under root user.
 Run the following commands at the manager's host.
 
 ```
+
 wget http://archive.cloudera.com/cm5/installer/latest/cloudera-manager-installer.bin
 chmod u+x cloudera-manager-installer.bin
 ./cloudera-manager-installer.bin
