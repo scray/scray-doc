@@ -177,20 +177,6 @@ yum -y install wget
 * 
 
 
-/etc/passwd
-cloudera-scm:x:997:995:Cloudera Manager:/var/lib/cloudera-scm-server:/bin/bash
-
-To run cloudera-scm-agent as root
-/etc/default/cloudera-scm-agent and uncommenting the line:
-USER="cloudera-scm"
-
-
-sudo service cloudera-scm-agent stop
-
-sudo service cloudera-scm-server stop
-sudo service cloudera-scm-server status
-
-
 
 
 
@@ -275,6 +261,26 @@ https://www.cloudera.com/documentation/enterprise/6/6.3/topics/prepare_cm_databa
 sudo /opt/cloudera/cm/schema/scm_prepare_database.sh postgresql scm scm
 ```
 
+
+
+We had problems to add a cluster later.  
+```
+emacs /etc/passwd
+```
+cloudera-scm:x:997:995:Cloudera Manager:/var/lib/cloudera-scm-server:/bin/bash
+
+To run cloudera-scm-agent as cloudera-scm
+```
+emacs /etc/default/cloudera-scm-agent
+```
+and uncomment the line:
+USER="cloudera-scm"
+
+
+
+
+
+
 Step 6: Install CDH and Other Software
 https://www.cloudera.com/documentation/enterprise/6/6.3/topics/install_software_cm_wizard.html#cm_installation_wizard
 
@@ -323,6 +329,8 @@ host[1-2]
 
 stick with parcels and none for the rest. Just press continue.
 
+Accept JDK License : press continue
+
 At the fourth screen enter the root password
 
 At screen 5 wait for the packages to be installed.
@@ -339,6 +347,16 @@ Choose the CDH 5 services that you want to install on your cluster.
 So I chose Custom Services and chose the services mainly from Core with Impala + Spark. Make sure to check Include Cloudera Navigator.
 
 choose HDFS, YARN, Zookepper
+
+Setup Database
+Set Database-Hostname to localhost:5432
+Fill in the other fields.
+Test connection.
+Continue.
+
+Command details
+Change directories to some place with enough free space
+
 
 at the next screen I chose "All Hosts" for Datanode and default for the rest. Then continue.
 
@@ -401,3 +419,8 @@ shutdown -r now
 * ### Add host2
 
     [Cloudera doc](https://www.cloudera.com/documentation/enterprise/5-6-x/topics/cm_mc_adding_hosts.html)
+
+sudo service cloudera-scm-agent stop
+
+sudo service cloudera-scm-server stop
+sudo service cloudera-scm-server status
