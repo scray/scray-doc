@@ -71,8 +71,8 @@ Edit the  ```/etc/hosts``` file and distribute it to all hosts
 
 ```
 127.0.0.1   localhost
-10.11.22.31 bdq-cassandra1.seeburger.de bdq-cassandra1
-10.11.22.32 bdq-cassandra2.seeburger.de bdq-cassandra2
+10.11.22.31 bdq-cassandra1.example.com bdq-cassandra1
+10.11.22.32 bdq-cassandra2.example.com bdq-cassandra2
 ```
 
 check
@@ -138,7 +138,7 @@ step 3-6
 ```
 sudo systemctl start ntpd
 sudo systemctl enable ntpd
-ntpdate -u seeburger.de
+ntpdate -u example.com
 hwclock --systohc
 date
 ```
@@ -290,7 +290,7 @@ sudo tail -f /var/log/cloudera-scm-server/cloudera-scm-server.log
 ```
 
 ```
-cloudera-1.research.dev.seeburger.de:7180
+cloudera-1.research.dev.example.com:7180
 ```
 
 
